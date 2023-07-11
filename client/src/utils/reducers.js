@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer } from 'react'; // import useReducer from react
 import {
   UPDATE_PRODUCTS,
   ADD_TO_CART,
@@ -9,7 +9,7 @@ import {
   UPDATE_CURRENT_CATEGORY,
   CLEAR_CART,
   TOGGLE_CART,
-} from './actions';
+} from './actions'; // import UPDATE_PRODUCTS, ADD_TO_CART, UPDATE_CART_QUANTITY, REMOVE_FROM_CART, ADD_MULTIPLE_TO_CART, UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY, CLEAR_CART, and TOGGLE_CART from ./actions
 
 const initalState = {
   products: [],
@@ -17,7 +17,7 @@ const initalState = {
   cartOpen: false,
   categories: [],
   currentCategory: "",
-};
+}; // declare initalState
 
 // The reducer is a function that accepts the current state and an action. It returns a new state based on that action.
 export const reducer = (state = initalState, action) => {

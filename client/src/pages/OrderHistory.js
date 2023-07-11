@@ -1,15 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'; // import React
+import { Link } from 'react-router-dom'; // import Link from react-router-dom
 
-import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { useQuery } from '@apollo/client'; // import useQuery from @apollo/client
+import { QUERY_USER } from '../utils/queries'; // import QUERY_USER from utils/queries
 
-function OrderHistory() {
-  const { data } = useQuery(QUERY_USER);
-  let user;
+function OrderHistory() { // define OrderHistory component
+  const { data } = useQuery(QUERY_USER); // set data to useQuery with QUERY_USER as argument
+  let user; // declare user
 
-  if (data) {
-    user = data.user;
+  if (data) { // if data exists
+    user = data.user; // set user to data.user
   }
 
   return (
@@ -49,4 +49,4 @@ function OrderHistory() {
   );
 }
 
-export default OrderHistory;
+export default OrderHistory; // export OrderHistory

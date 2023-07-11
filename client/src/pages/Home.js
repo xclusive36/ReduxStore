@@ -1,7 +1,7 @@
-import React from "react";
-import ProductList from "../components/ProductList";
-import CategoryMenu from "../components/CategoryMenu";
-import Cart from "../components/Cart";
+import React from "react"; // import React
+import ProductList from "../components/ProductList"; // import ProductList component
+import CategoryMenu from "../components/CategoryMenu"; // import CategoryMenu component
+import Cart from "../components/Cart"; // import Cart component
 
 const Home = () => {
   return (
@@ -13,4 +13,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home; // export Home

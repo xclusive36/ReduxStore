@@ -1,11 +1,11 @@
-import React from "react";
-import Auth from "../../utils/auth";
-import { Link } from "react-router-dom";
+import React from "react"; // import React
+import Auth from "../../utils/auth"; // import Auth from utils/auth
+import { Link } from "react-router-dom"; // import Link from react-router-dom
 
-function Nav() {
+function Nav() { // define Nav component
 
-  function showNavigation() {
-    if (Auth.loggedIn()) {
+  function showNavigation() { // define showNavigation function
+    if (Auth.loggedIn()) { // if Auth.loggedIn() is true
       return (
         <ul className="flex-row">
           <li className="mx-1">
@@ -55,4 +55,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default Nav; // export Nav component

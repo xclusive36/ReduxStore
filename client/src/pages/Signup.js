@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
+import React, { useState } from 'react'; // import React and useState hook
+import { Link } from 'react-router-dom'; // import Link from react-router-dom
+import { useMutation } from '@apollo/client'; // import useMutation from @apollo/client
+import Auth from '../utils/auth'; // import Auth from utils/auth
+import { ADD_USER } from '../utils/mutations'; // import ADD_USER from utils/mutations
 
-function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
+function Signup(props) { // define Signup component with props as argument
+  const [formState, setFormState] = useState({ email: '', password: '' }); // set formState and setFormState to useState with { email: '', password: '' } as argument
+  const [addUser] = useMutation(ADD_USER); // set addUser to useMutation with ADD_USER as argument
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
+  const handleFormSubmit = async (event) => { // define handleFormSubmit function with event as argument
+    event.preventDefault(); // prevent default event behavior
+    const mutationResponse = await addUser({ // set mutationResponse to await addUser with { email: formState.email, password: formState.password, firstName: formState.firstName, lastName: formState.lastName } as argument
+      variables: { // set variables to { email: formState.email, password: formState.password, firstName: formState.firstName, lastName: formState.lastName }
         email: formState.email,
         password: formState.password,
         firstName: formState.firstName,
         lastName: formState.lastName,
       },
     });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
+    const token = mutationResponse.data.addUser.token; // set token to mutationResponse.data.addUser.token
+    Auth.login(token); // call Auth.login with token as argument
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
+  const handleChange = (event) => { // define handleChange function with event as argument
+    const { name, value } = event.target; // destructure name and value from event.target
+    setFormState({ // call setFormState
+      ...formState, // spread formState
+      [name]: value, // set [name] to value
     });
   };
 
@@ -84,4 +84,4 @@ function Signup(props) {
   );
 }
 
-export default Signup;
+export default Signup; // export Signup

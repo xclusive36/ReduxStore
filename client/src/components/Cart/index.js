@@ -1,67 +1,67 @@
-import React, { useEffect } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
-import { useLazyQuery } from '@apollo/client';
-import { QUERY_CHECKOUT } from '../../utils/queries';
-import { idbPromise } from '../../utils/helpers';
-import CartItem from '../CartItem';
-import Auth from '../../utils/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
-import './style.css';
+import React, { useEffect } from 'react'; // import React and useEffect hook
+import { loadStripe } from '@stripe/stripe-js'; // import loadStripe from @stripe/stripe-js
+import { useLazyQuery } from '@apollo/client'; // import useLazyQuery from @apollo/client
+import { QUERY_CHECKOUT } from '../../utils/queries'; // import QUERY_CHECKOUT from utils/queries
+import { idbPromise } from '../../utils/helpers'; // import idbPromise from utils/helpers
+import CartItem from '../CartItem'; // import CartItem component
+import Auth from '../../utils/auth'; // import Auth from utils/auth
+import { useDispatch, useSelector } from 'react-redux'; // import useDispatch and useSelector from react-redux
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions'; // import TOGGLE_CART and ADD_MULTIPLE_TO_CART from utils/actions
+import './style.css'; // import style.css
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx'); // set stripePromise to loadStripe with pk_test_TYooMQauvdEDq54NiTphI7jx
 
-const Cart = () => {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+const Cart = () => { // define Cart component
+  const dispatch = useDispatch(); // set dispatch to useDispatch
+  const state = useSelector((state) => state); // set state to useSelector with state as argument
+  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT); // set getCheckout and data to useLazyQuery with QUERY_CHECKOUT as argument
 
-  useEffect(() => {
-    if (data) {
-      stripePromise.then((res) => {
-        res.redirectToCheckout({ sessionId: data.checkout.session });
+  useEffect(() => { // define useEffect hook
+    if (data) { // if data exists
+      stripePromise.then((res) => { // call stripePromise.then with res as argument
+        res.redirectToCheckout({ sessionId: data.checkout.session }); // call redirectToCheckout on res with data.checkout.session as argument
       });
     }
-  }, [data]);
+  }, [data]); // pass data as dependency
 
-  useEffect(() => {
-    async function getCart() {
-      const cart = await idbPromise('cart', 'get');
-      dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
+  useEffect(() => { // define useEffect hook
+    async function getCart() { // define getCart function
+      const cart = await idbPromise('cart', 'get'); // set cart as idbPromise with 'cart' and 'get' as arguments
+      dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] }); // dispatch ADD_MULTIPLE_TO_CART with cart as argument
     }
 
-    if (!state.cart.length) {
-      getCart();
+    if (!state.cart.length) { // if state.cart.length is 0
+      getCart(); // call getCart
     }
-  }, [state.cart.length, dispatch]);
+  }, [state.cart.length, dispatch]); // pass state.cart.length and dispatch as dependencies
 
-  function toggleCart() {
-    dispatch({ type: TOGGLE_CART });
+  function toggleCart() { // define toggleCart function
+    dispatch({ type: TOGGLE_CART }); // dispatch TOGGLE_CART
   }
 
-  function calculateTotal() {
-    let sum = 0;
-    state.cart.forEach((item) => {
-      sum += item.price * item.purchaseQuantity;
+  function calculateTotal() { // define calculateTotal function
+    let sum = 0; // set new variable sum to 0
+    state.cart.forEach((item) => { // for each item in state.cart
+      sum += item.price * item.purchaseQuantity; // add item.price * item.purchaseQuantity to sum
     });
-    return sum.toFixed(2);
+    return sum.toFixed(2); // return sum.toFixed(2)
   }
 
-  function submitCheckout() {
-    const productIds = [];
+  function submitCheckout() { // define submitCheckout function
+    const productIds = []; // set new variable productIds to empty array
 
-    state.cart.forEach((item) => {
-      for (let i = 0; i < item.purchaseQuantity; i++) {
-        productIds.push(item._id);
+    state.cart.forEach((item) => { // for each item in state.cart
+      for (let i = 0; i < item.purchaseQuantity; i++) { // loop through item.purchaseQuantity
+        productIds.push(item._id); // push item._id to productIds
       }
     });
 
-    getCheckout({
-      variables: { products: productIds },
+    getCheckout({ // call getCheckout query
+      variables: { products: productIds }, // set variables to { products: productIds }
     });
   }
 
-  if (!state.cartOpen) {
+  if (!state.cartOpen) { // if state.cartOpen is false
     return (
       <div className="cart-closed" onClick={toggleCart}>
         <span role="img" aria-label="trash">
@@ -105,4 +105,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Cart; // export Cart component

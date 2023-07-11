@@ -1,8 +1,5 @@
-import React from "react";
-
-// The ...props means, spread all of the passed props onto this element
-// That way we don't have to define them all individually
-function DeleteBtn(props) {
+import React from "react"; // import React
+function DeleteBtn(props) { // define DeleteBtn component with props as argument
   return (
     <span {...props} role="button" tabIndex="0">
       ✗
@@ -10,4 +7,4 @@ function DeleteBtn(props) {
   );
 }
 
-export default DeleteBtn;
+export default DeleteBtn; // export DeleteBtn
