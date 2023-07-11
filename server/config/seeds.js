@@ -1,10 +1,10 @@
-const db = require('./connection');
-const { User, Product, Category } = require('../models');
+const db = require('./connection'); // import connection.js
+const { User, Product, Category } = require('../models'); // import User, Product, and Category models
 
-db.once('open', async () => {
-  await Category.deleteMany();
+db.once('open', async () => { // set db.once to async function
+  await Category.deleteMany(); // await Category.deleteMany
 
-  const categories = await Category.insertMany([
+  const categories = await Category.insertMany([ // set categories to await Category.insertMany
     { name: 'Food' },
     { name: 'Household Supplies' },
     { name: 'Electronics' },
@@ -12,11 +12,11 @@ db.once('open', async () => {
     { name: 'Toys' }
   ]);
 
-  console.log('categories seeded');
+  console.log('categories seeded'); // log 'categories seeded'
 
-  await Product.deleteMany();
+  await Product.deleteMany(); // await Product.deleteMany
 
-  const products = await Product.insertMany([
+  const products = await Product.insertMany([ // set products to await Product.insertMany
     {
       name: 'Tin of Cookies',
       description:
@@ -126,11 +126,11 @@ db.once('open', async () => {
     }
   ]);
 
-  console.log('products seeded');
+  console.log('products seeded'); // log 'products seeded'
 
-  await User.deleteMany();
+  await User.deleteMany(); // await User.deleteMany
 
-  await User.create({
+  await User.create({ // await User.create
     firstName: 'Pamela',
     lastName: 'Washington',
     email: 'pamela@testmail.com',
@@ -142,14 +142,14 @@ db.once('open', async () => {
     ]
   });
 
-  await User.create({
+  await User.create({ // await User.create
     firstName: 'Elijah',
     lastName: 'Holt',
     email: 'eholt@testmail.com',
     password: 'password12345'
   });
 
-  console.log('users seeded');
+  console.log('users seeded'); // log 'users seeded'
 
-  process.exit();
+  process.exit(); // exit process
 });

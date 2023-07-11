@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // Require mongoose package
 
-const { Schema } = mongoose;
+const { Schema } = mongoose; // Destructure Schema
 
 const productSchema = new Schema({
   name: {
@@ -31,6 +31,6 @@ const productSchema = new Schema({
   }
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Product', productSchema); // Create Product model
 
-module.exports = Product;
+module.exports = Product; 

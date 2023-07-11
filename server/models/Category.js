@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // Require mongoose package
 
-const { Schema } = mongoose;
+const { Schema } = mongoose; // Destructure Schema
 
 const categorySchema = new Schema({
   name: {
@@ -10,6 +10,6 @@ const categorySchema = new Schema({
   }
 });
 
-const Category = mongoose.model('Category', categorySchema);
+const Category = mongoose.model('Category', categorySchema); // Create Category model
 
-module.exports = Category;
+module.exports = Category; // Export Category model
